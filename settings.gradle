@@ -96,6 +96,7 @@ include 'hibernate-transaction-client'
 include 'hibernate-envers'
 include 'hibernate-envers-jakarta'
 include 'hibernate-spatial'
+project(':hibernate-spatial').projectDir = new File(rootProject.projectDir, "hibernate-spatial")
 
 include 'hibernate-java8'
 
