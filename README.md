@@ -162,6 +162,7 @@ omitting the argument will print a list of possible options.
 When the database is properly started, you can run tests with special profiles that are suffixed with `_ci`
 e.g. `pgsql_ci` for PostgreSQL. By using the system property `dbHost` you can configure the IP address of your docker host.
 
+
 The command for running tests could look like the following:
 
     gradlew test -Pdb=pgsql_ci "-DdbHost=192.168.99.100"
