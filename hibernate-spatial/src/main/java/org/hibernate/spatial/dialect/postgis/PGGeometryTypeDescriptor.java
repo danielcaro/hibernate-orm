@@ -54,20 +54,21 @@ public class PGGeometryTypeDescriptor implements SqlTypeDescriptor {
 			return null;
 		}
 		ByteBuffer buffer;
-		if ( object instanceof PGobject ) {
-			String pgValue = ( (PGobject) object ).getValue();
+		String pgValue = null;
+		if ( object instanceof PGobject ) { pgValue = ( (PGobject) object ).getValue(); }
+		if ( object instanceof String ) { pgValue = object; }
 
-			assert pgValue != null;
-			if ( pgValue.startsWith( "00" ) || pgValue.startsWith( "01" ) ) {
-				//we have a WKB because this pgValue starts with the bit-order byte
-				buffer = ByteBuffer.from( pgValue );
-				final WkbDecoder decoder = Wkb.newDecoder( wkbDialect );
-				return decoder.decode( buffer );
-			}
-			else {
-				return parseWkt( pgValue );
-			}
-
+		if (pgValue == null) {
+			return null;
+		}
+		if ( pgValue.startsWith( "00" ) || pgValue.startsWith( "01" ) ) {
+			//we have a WKB because this pgValue starts with the bit-order byte
+			buffer = ByteBuffer.from( pgValue );
+			final WkbDecoder decoder = Wkb.newDecoder( wkbDialect );
+			return decoder.decode( buffer );
+		}
+		else {
+			return parseWkt( pgValue );
 		}
 		throw new IllegalStateException( "Received object of type " + object.getClass().getCanonicalName() );
 	}
