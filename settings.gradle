@@ -87,6 +87,7 @@ logger.lifecycle "Java versions for main code: " + gradle.ext.javaVersions.main
 logger.lifecycle "Java versions for tests: " + gradle.ext.javaVersions.test
 
 include 'hibernate-core'
+project(':hibernate-core').projectDir = new File(rootProject.projectDir, "hibernate-core")
 include 'hibernate-core-jakarta'
 include 'hibernate-entitymanager'
 include 'hibernate-testing'
