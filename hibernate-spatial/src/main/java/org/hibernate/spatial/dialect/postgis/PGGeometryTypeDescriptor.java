@@ -56,7 +56,8 @@ public class PGGeometryTypeDescriptor implements SqlTypeDescriptor {
 		ByteBuffer buffer;
 		String pgValue = null;
 		if ( object instanceof PGobject ) { pgValue = ( (PGobject) object ).getValue(); }
-		if ( object instanceof String ) { pgValue = (String) object; }
+		else if ( object instanceof String ) { pgValue = (String) object; }
+		else { throw new IllegalStateException( "Received object of type " + object.getClass().getCanonicalName() ); }
 
 		if (pgValue == null) {
 			return null;
@@ -70,7 +71,6 @@ public class PGGeometryTypeDescriptor implements SqlTypeDescriptor {
 		else {
 			return parseWkt( pgValue );
 		}
-		throw new IllegalStateException( "Received object of type " + object.getClass().getCanonicalName() );
 	}
 
 	private static Geometry<?> parseWkt(String pgValue) {
