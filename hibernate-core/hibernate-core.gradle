@@ -12,6 +12,7 @@ apply from: rootProject.file( 'gradle/published-java-module.gradle' )
 apply plugin: 'antlr'
 apply plugin: 'hibernate-matrix-testing'
 apply plugin: 'org.hibernate.build.gradle.xjc'
+apply plugin: 'maven'
 
 ext {
     jaxbTargetDir = file( "${buildDir}/generated-src/jaxb/main" )
