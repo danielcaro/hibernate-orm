@@ -56,7 +56,7 @@ public class PGGeometryTypeDescriptor implements SqlTypeDescriptor {
 		ByteBuffer buffer;
 		String pgValue = null;
 		if ( object instanceof PGobject ) { pgValue = ( (PGobject) object ).getValue(); }
-		if ( object instanceof String ) { pgValue = object; }
+		if ( object instanceof String ) { pgValue = (String) object; }
 
 		if (pgValue == null) {
 			return null;
